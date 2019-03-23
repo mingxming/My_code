@@ -3,32 +3,8 @@
 #include<time.h>
 #include <iostream>
 using namespace std;
-#define N 19 //Õû¸öÃÔ¹¬´óĞ¡(°üÀ¨×îÍâ²ãÇ½±Ú),0ÎªÍ¨£¬1Îª±Õ
+#define N 19 //æ•´ä¸ªè¿·å®«å¤§å°(åŒ…æ‹¬æœ€å¤–å±‚å¢™å£),0ä¸ºé€šï¼Œ1ä¸ºé—­
 #define MaxSize 99
-
-/*int Maze[N][N] =
-{
-    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-    {1,0,1,1,1,0,1,0,0,1,0,0,0,0,0,0,1,0,1},
-    {1,0,0,0,1,1,1,0,1,0,1,1,1,1,1,0,0,1,1},
-    {1,0,1,0,0,1,1,0,1,1,0,1,0,1,1,0,0,0,1},
-    {1,0,0,0,0,0,1,0,1,1,1,1,1,0,1,1,1,0,1},
-    {1,1,0,1,1,0,1,0,1,0,0,0,1,0,0,0,0,0,1},
-    {1,0,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,0,1},
-    {1,0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1},
-    {1,1,0,1,1,1,1,1,1,1,1,0,1,0,1,1,1,0,1},
-    {1,0,1,1,0,0,0,0,0,0,1,1,1,0,1,0,0,0,1},
-    {1,0,1,0,1,1,1,0,0,0,1,0,1,1,1,1,1,0,1},
-    {1,0,0,0,1,1,0,1,0,1,1,0,1,0,0,0,0,0,1},
-    {1,1,1,0,1,0,1,1,1,1,0,0,1,0,1,1,1,1,1},
-    {1,0,1,0,1,0,0,0,0,1,1,0,1,0,1,0,1,0,1},
-    {1,0,1,0,1,1,1,1,1,1,0,1,0,1,1,1,1,0,1},
-    {1,1,1,0,1,0,0,1,1,1,0,1,1,0,0,1,1,0,1},
-    {1,0,1,0,1,0,1,0,1,1,0,1,1,1,1,0,1,1,1},
-    {1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,1},
-    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-};*/
-//int N = 19;
 
 int Maze[N][N]={0};
 
@@ -36,16 +12,14 @@ int Maze[N][N]={0};
 void CreateMaze()
 {
     int i,j;
-    srand((unsigned)time(NULL)); ///srand()¾ÍÊÇ¸ørand()Ìá¹©ÖÖ×Óseed
+    srand((unsigned)time(NULL)); ///srand()å°±æ˜¯ç»™rand()æä¾›ç§å­seed
     for (i=0; i<N; i++)
     {
 
         for(j=0; j<N; j++)
         {
 
-            int num = (rand()+1)%2;            //¶Ô2È¡ÓàµÃµ½¾ÍÊÇ0»òÕß1
-            //srand(unsigned(time(0)));    //»ñÈ¡ÏµÍ³Ê±¼ä
-            //int num = rand()%2;         //Éú³ÉËæ»úÊı
+            int num = (rand()+1)%2;            //å¯¹2å–ä½™å¾—åˆ°å°±æ˜¯0æˆ–è€…1    
             Maze[i][j] = num ;
             if(i==0||j==0||i==N-1||j==N-1) Maze[i][j]=1;
 
@@ -53,9 +27,9 @@ void CreateMaze()
     }
     Maze[1][1]=0,Maze[N-2][N-2]=0;
 }
-int Maze_sy[N][N]={0};//¶¨Òå¸¨ÖúÊı×é£¬ËùÓĞÊı×éÔªËØ¾ùÎª0
+int Maze_sy[N][N]={0};//å®šä¹‰è¾…åŠ©æ•°ç»„ï¼Œæ‰€æœ‰æ•°ç»„å…ƒç´ å‡ä¸º0
 
-//ÓÃ¶şÎ¬Êı×é¶¨Òå8¸ö·½Ïò,´Ó±±£¬ÄæÊ±Õë¿ªÊ¼
+//ç”¨äºŒç»´æ•°ç»„å®šä¹‰8ä¸ªæ–¹å‘,ä»åŒ—ï¼Œé€†æ—¶é’ˆå¼€å§‹
 int step[8][2]=
 {
     {-1,0},
@@ -76,35 +50,35 @@ void printMaze()
         printf("\n");
         for(j=0; j<N; j++)
         {
-            //if(i==0||j==0||i==N-1||j==N-1) continue; //²»Êä³öÇ½±Ú
-            if(i==0||i==N-1) printf("¡ª");
+            
+            if(i==0||i==N-1) printf("â€”");
             else if(j==0||j==N-1) printf("|");
             else printf("%d ",Maze[i][j]);
         }
     }
 
 }
-//µÚ¶ş¸öÎÊÌâ£¬ÏÈ¼òµ¥µã£¬Ä¬ÈÏ×óÉÏ½ÇÎªÈë¿Ú£¬ÓÒÏÂ½ÇÎª³ö¿Ú£¬ÓĞ8¸ö·½Ïò¿É×ß£¬ÔõÃ´±íÊ¾ÄØ£¿
+//ç¬¬äºŒä¸ªé—®é¢˜ï¼Œå…ˆç®€å•ç‚¹ï¼Œé»˜è®¤å·¦ä¸Šè§’ä¸ºå…¥å£ï¼Œå³ä¸‹è§’ä¸ºå‡ºå£ï¼Œæœ‰8ä¸ªæ–¹å‘å¯èµ°ï¼Œæ€ä¹ˆè¡¨ç¤ºå‘¢ï¼Ÿ
 typedef struct
 {
     short int row;
     short int col;
-    short int dir=0;//8¸öÊıÖµ´ú±íÁË8¸ö·½Ïò,Ò»¿ªÊ¼Ä¬ÈÏÎª0
+    short int dir=0;//8ä¸ªæ•°å€¼ä»£è¡¨äº†8ä¸ªæ–¹å‘,ä¸€å¼€å§‹é»˜è®¤ä¸º0
 } Point;
-//¶¨ÒåÕ»
+//å®šä¹‰æ ˆ
 typedef struct
 {
-    Point Data[MaxSize];    // ´æ´¢ÔªËØµÄÊı×é
-    int Top; //Õ»¶¥Ö¸Õë
+    Point Data[MaxSize];    // å­˜å‚¨å…ƒç´ çš„æ•°ç»„
+    int Top; //æ ˆé¡¶æŒ‡é’ˆ
 
 } SeqStack;
 
-void InitStack(SeqStack *s) //´´½¨Ò»¸öÕ»
+void InitStack(SeqStack *s) //åˆ›å»ºä¸€ä¸ªæ ˆ
 {
-    s->Top=-1; //±íÊ¾Õ»¿Õ
+    s->Top=-1; //è¡¨ç¤ºæ ˆç©º
 }
 
-bool Push(SeqStack *s, Point x)//½øÕ»²Ù×÷
+bool Push(SeqStack *s, Point x)//è¿›æ ˆæ“ä½œ
 {
     if(s->Top==MaxSize-1)
         return false;
@@ -116,7 +90,7 @@ bool Push(SeqStack *s, Point x)//½øÕ»²Ù×÷
     }
 }
 
-bool Pop(SeqStack *s)  //³öÕ»²Ù×÷
+bool Pop(SeqStack *s)  //å‡ºæ ˆæ“ä½œ
 {
     if(s->Top==-1)
         return false;
@@ -127,7 +101,7 @@ bool Pop(SeqStack *s)  //³öÕ»²Ù×÷
     }
 }
 
-bool GetAllElem(SeqStack *s) //µü´úÕ»
+bool GetAllElem(SeqStack *s) //è¿­ä»£æ ˆ
 {
     if(s->Top==-1) return false;
     else
@@ -141,22 +115,22 @@ bool GetAllElem(SeqStack *s) //µü´úÕ»
     }
 
 }
-//ÎÊÌâÈı£¬dfsËã·¨
-int path(Point p,SeqStack s)  //ÄÑµÀÊÇsºÍ&µÄÇø±ğ£¿£¿£¿£¿
+//é—®é¢˜ä¸‰ï¼Œdfsç®—æ³•
+int path(Point p,SeqStack s)  //éš¾é“æ˜¯så’Œ&çš„åŒºåˆ«ï¼Ÿï¼Ÿï¼Ÿï¼Ÿ
 {
     if (Maze[p.row][p.col]==1)   //
     {
-        //Pop(&s); ²»ÓÃÉ¾³ı£¬Ó¦¸ÃÍË»Øµ½ÉÏÒ»¸öÔªËØ£¬¼ÌĞø·ÃÎÊÃ»·ÃÎÊ¹ıµÄ½áµã
-        printf("***(%d,%d)ÎŞĞ§***\n",p.col,p.row);
-        //printf("(A-,%d)->",s.Data[s.Top-1].dir);
-        // if(p.col&&p.row==0) return 0; //²»ÄÜÔÚ´ËÍË³öµ÷ÓÃº¯Êı
-    } //ÎŞĞ§Æğµã
+        //Pop(&s); ä¸ç”¨åˆ é™¤ï¼Œåº”è¯¥é€€å›åˆ°ä¸Šä¸€ä¸ªå…ƒç´ ï¼Œç»§ç»­è®¿é—®æ²¡è®¿é—®è¿‡çš„ç»“ç‚¹
+        printf("***(%d,%d)æ— æ•ˆ***\n",p.col,p.row);
+        /
+        // if(p.col&&p.row==0) return 0; //ä¸èƒ½åœ¨æ­¤é€€å‡ºè°ƒç”¨å‡½æ•°
+    } //æ— æ•ˆèµ·ç‚¹
     else
     {
         if(p.col==N-2&&p.row==N-2)
         {
             Push(&s,p);
-            printf("\n¹§Ï²µ½´ïÖÕµã£¡Â·¾¶ÈçÏÂ:\n\n");
+            printf("\næ­å–œåˆ°è¾¾ç»ˆç‚¹ï¼è·¯å¾„å¦‚ä¸‹:\n\n");
             GetAllElem(&s);
             return 1;
         }
@@ -165,52 +139,52 @@ int path(Point p,SeqStack s)  //ÄÑµÀÊÇsºÍ&µÄÇø±ğ£¿£¿£¿£¿
             if
             (Maze_sy[p.row][p.col]==0)
             {
-                Push(&s,p);//ÈëÕ»£¨¸ù½Úµã£©
-                Maze_sy[p.row][p.col]=1;// ±êÖ¾ÒÑ¸ø·ÃÎÊ¹ı
-                printf("Ñ¹Èëµã:(%d,%d)->",s.Data[s.Top].col,s.Data[s.Top].row);//Êä³ö½Úµã×ø±ê
+                Push(&s,p);//å…¥æ ˆï¼ˆæ ¹èŠ‚ç‚¹ï¼‰
+                Maze_sy[p.row][p.col]=1;// æ ‡å¿—å·²ç»™è®¿é—®è¿‡
+                printf("å‹å…¥ç‚¹:(%d,%d)->",s.Data[s.Top].col,s.Data[s.Top].row);//è¾“å‡ºèŠ‚ç‚¹åæ ‡
             }
         }
 
     }
 
-    //int len=sizeof(s.Data)/sizeof(int);//²»¸ÃÊı×é³¤¶È Ó¦¸ÃÓÃÕ»¶¥Ö¸Õë£¡
+    //int len=sizeof(s.Data)/sizeof(int);//ä¸è¯¥æ•°ç»„é•¿åº¦ åº”è¯¥ç”¨æ ˆé¡¶æŒ‡é’ˆï¼
     short int dir=p.dir;
     Point next_p;
-    // printf("****%d***",s.Data[s.Top].dir);  ²âÊÔµ±Ç°ÊÇ·ñdir¿É´ïµ½7µÄÓï¾ä
-    if(s.Data[s.Top].dir==7)   //ÅĞ¶Ï¸ÃÕ»¶¥ÔªËØÊÇ·ñËÑË÷Íê³É£¬
+    // printf("****%d***",s.Data[s.Top].dir);  æµ‹è¯•å½“å‰æ˜¯å¦dirå¯è¾¾åˆ°7çš„è¯­å¥
+    if(s.Data[s.Top].dir==7)   //åˆ¤æ–­è¯¥æ ˆé¡¶å…ƒç´ æ˜¯å¦æœç´¢å®Œæˆï¼Œ
     {
-        Pop(&s);    //Íê³ÉÔòµ¯³ö
-        //printf("µ¯ÎŞĞ§µã->");
-        if( s.Top==-1 )//Õ»ÊÇ·ñÎª¿Õ£¬¿ÕÔòÃ»ÓĞÂ·¾¶
+        Pop(&s);    //å®Œæˆåˆ™å¼¹å‡º
+        //printf("å¼¹æ— æ•ˆç‚¹->");
+        if( s.Top==-1 )//æ ˆæ˜¯å¦ä¸ºç©ºï¼Œç©ºåˆ™æ²¡æœ‰è·¯å¾„
         {
-            printf("\n\nºÜÒÅº¶!Ã»ÓĞÂ·¾¶×ß³öÃÔ¹¬£¡\n\n");
+            printf("\n\nå¾ˆé—æ†¾!æ²¡æœ‰è·¯å¾„èµ°å‡ºè¿·å®«ï¼\n\n");
             return 0;
         }
         else
         {
-            //printf("***hello2->"); ²âÊÔ´úÂë¿É·ñÔËĞĞµ½´Ë´¦
-            printf("»ØËİµ½: (%d,%d)->",s.Data[s.Top].col,s.Data[s.Top].row); //»Øµ½Õ»¶¥ÔªËØ
-            //Maze_sy[s.Data[s.Top].col][s.Data[s.Top].row]=0;//Õ»¶¥ÖØĞÂÉèÖÃÎªÎ´·ÃÎÊ
-            path(s.Data[s.Top],s);  //·µ»ØÕ»¶¥
+            //printf("***hello2->"); æµ‹è¯•ä»£ç å¯å¦è¿è¡Œåˆ°æ­¤å¤„
+            printf("å›æº¯åˆ°: (%d,%d)->",s.Data[s.Top].col,s.Data[s.Top].row); //å›åˆ°æ ˆé¡¶å…ƒç´ 
+            //Maze_sy[s.Data[s.Top].col][s.Data[s.Top].row]=0;//æ ˆé¡¶é‡æ–°è®¾ç½®ä¸ºæœªè®¿é—®
+            path(s.Data[s.Top],s);  //è¿”å›æ ˆé¡¶
 
         }
     }
-    else   //ËÑË÷Ã»ÓĞÍê³É£¬È¡Î´±»ËÑË÷µÄ¸ù½Úµã£¬²¢»Øµ½µÚ2²½
+    else   //æœç´¢æ²¡æœ‰å®Œæˆï¼Œå–æœªè¢«æœç´¢çš„æ ¹èŠ‚ç‚¹ï¼Œå¹¶å›åˆ°ç¬¬2æ­¥
     {
 
 
-        for(; dir<=7;)  //½çÏŞÓ¦¸ÃÊÇ0µ½6»¹ÊÇ0µ½7£¿£¿
+        for(; dir<=7;)  //ç•Œé™åº”è¯¥æ˜¯0åˆ°6è¿˜æ˜¯0åˆ°7ï¼Ÿï¼Ÿ
         {
-            next_p.row=p.row+step[dir][1]; //ÎÊÌâ£¬ÏÂÒ»¸öµãµÄÎ»ÖÃ¼ÆËã
+            next_p.row=p.row+step[dir][1]; //é—®é¢˜ï¼Œä¸‹ä¸€ä¸ªç‚¹çš„ä½ç½®è®¡ç®—
             next_p.col=p.col+step[dir][0];
-            if ((Maze[next_p.row][next_p.col]!=1)&&(Maze_sy[next_p.row][next_p.col]!=1)) break;//´Ë´¦×¢ÒâÒ»ÏÂ£¬ÏÂÒ»¸öµã²»ÊÇ1£¬ºÍÒ»¸öµã±êÖ¾²»Îª1£¬
+            if ((Maze[next_p.row][next_p.col]!=1)&&(Maze_sy[next_p.row][next_p.col]!=1)) break;//æ­¤å¤„æ³¨æ„ä¸€ä¸‹ï¼Œä¸‹ä¸€ä¸ªç‚¹ä¸æ˜¯1ï¼Œå’Œä¸€ä¸ªç‚¹æ ‡å¿—ä¸ä¸º1ï¼Œ
             else dir++;
         }
-        if(dir==8) dir--; //dir×îÖÕ»á¼Óµ½8¡£¡£¡£Ö»ÄÜÕâÖÖÀÏ·½·¨ÁË
-        //p.dir=dir;//ÎªÊ²Ã´ÕâÖÖ·½·¨²»ĞĞ£¿
-        s.Data[s.Top].dir=dir;// ¼ÇÂ¼×ßµÄ·½Ïò
-        // printf("(s.top.dir)->%d->",s.Data[s.Top].dir); ²âÊÔdirÊÇ·ñ³É¹¦¸³Öµ¸øpµã
-        printf("  ÏÂÒ»¸ö:(%d,%d)\n",next_p.col,next_p.row);
+        if(dir==8) dir--; //diræœ€ç»ˆä¼šåŠ åˆ°8ã€‚ã€‚ã€‚åªèƒ½è¿™ç§è€æ–¹æ³•äº†
+        //p.dir=dir;//ä¸ºä»€ä¹ˆè¿™ç§æ–¹æ³•ä¸è¡Œï¼Ÿ
+        s.Data[s.Top].dir=dir;// è®°å½•èµ°çš„æ–¹å‘
+        // printf("(s.top.dir)->%d->",s.Data[s.Top].dir); æµ‹è¯•diræ˜¯å¦æˆåŠŸèµ‹å€¼ç»™pç‚¹
+        printf("  ä¸‹ä¸€ä¸ª:(%d,%d)\n",next_p.col,next_p.row);
         path(next_p,s);
     }
 }
@@ -219,10 +193,10 @@ int main()
 {
     SeqStack s;
     InitStack(&s);
-    Point startpoint;  //¶¨Òå¿ªÊ¼Æğµã
-    Point endpoint;    //¶¨ÒåÖÕµã
-    startpoint.row=1,startpoint.col=1; //ÆğµãÎª£¨1,1)
-    endpoint.row=N-2,endpoint.col=N-2;//ÖÕµãÎª(N,N)
+    Point startpoint;  //å®šä¹‰å¼€å§‹èµ·ç‚¹
+    Point endpoint;    //å®šä¹‰ç»ˆç‚¹
+    startpoint.row=1,startpoint.col=1; //èµ·ç‚¹ä¸ºï¼ˆ1,1)
+    endpoint.row=N-2,endpoint.col=N-2;//ç»ˆç‚¹ä¸º(N,N)
     //CreateMaze();
    // printMaze();
    // printf("\n\n");
